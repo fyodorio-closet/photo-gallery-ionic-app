@@ -17,11 +17,6 @@ const routes: Routes = [
         pathMatch: 'full',
       },
       {
-        path: 'home',
-        outlet: 'home',
-        component: HomePage
-      },
-      {
         path: 'about',
         outlet: 'about',
         component: AboutPage
@@ -30,12 +25,17 @@ const routes: Routes = [
         path: 'contact',
         outlet: 'contact',
         component: ContactPage
+      },
+      {
+          path: 'home',
+          outlet: 'home',
+          component: HomePage
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/tabs/(home:home)',
+    redirectTo: '/tabs/(about:about)',
     pathMatch: 'full'
   }
 ];

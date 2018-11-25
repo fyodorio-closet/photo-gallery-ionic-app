@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Camera, CameraOptions} from '@ionic-native/camera/ngx';
 import { Storage } from '@ionic/storage';
+import {LoadingController} from '@ionic/angular';
 
 class Photo {
     data: any;
@@ -13,7 +14,7 @@ class Photo {
 export class PhotoProviderService {
     public photos: Photo[] = [];
 
-    constructor(public http: HttpClient, private camera: Camera, private storage: Storage) { }
+    constructor(public http: HttpClient, private camera: Camera, private storage: Storage, private loadingController: LoadingController) { }
 
     takePicture() {
         const options: CameraOptions = {
@@ -34,9 +35,14 @@ export class PhotoProviderService {
         });
     }
 
-    loadSaved() {
-        this.storage.get('photos').then((photos) => {
-            this.photos = photos || [];
+    async loadSaved() {
+        this.loadingController.create({}).then((loader) => {
+            loader.present();
+            this.storage.get('photos').then((photos) => {
+                this.photos = photos || [];
+                loader.dismiss();
+            });
         });
+        return await true;
     }
 }

@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import { NavController } from '@ionic/angular';
 import { PhotoProviderService } from '../photo-provider.service';
 
 @Component({
@@ -8,8 +7,7 @@ import { PhotoProviderService } from '../photo-provider.service';
   styleUrls: ['about.page.scss']
 })
 export class AboutPage implements OnInit {
-    constructor(public navCtrl: NavController, private photoService: PhotoProviderService) {
-    }
+    constructor(private photoService: PhotoProviderService) {}
 
     ngOnInit() {
         this.photoService.loadSaved();
